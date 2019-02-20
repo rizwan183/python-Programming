@@ -1,0 +1,20 @@
+class Student:
+      def assing(self,roll_no,name,me,mm,ms):
+          self.roll_no=roll_no
+          self.name=name
+          self.english=me
+          self.math=mm
+          self.science=ms
+      def dis(self):
+          total=self.english + self.math + self.science
+          print("Totoal Number is ",total)
+          print("Percentage is " ,total/3)
+roll_no=int(input("Enter Roll_no !"))
+name=input("name")
+eng=int(input("English Mark"))
+math=int(input("Math Mark"))
+sci=int(input("Science Mark"))
+print("____________________________________________________________________________________________________________________")
+s=Student()
+s.assing(roll_no,name,eng,math,sci)
+s.dis()
