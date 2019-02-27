@@ -1,0 +1,12 @@
+#insert Data into MongoDb
+from pymongo import MongoClient
+mc=MongoClient()
+db=mc.Rizwan # Rizwan is database Name
+d1={
+ "_id":184,
+ "name":"Ansari",
+ "salary":18500
+}
+res=db.Employee.insert_one(d1) # Emplyee is collection name
+print(res)
+print("success")
