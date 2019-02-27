@@ -1,0 +1,11 @@
+#Update Data into MongoDb
+from pymongo import MongoClient
+mc=MongoClient()
+db=mc.Rizwan # Rizwan is database Name
+d1={
+ "_id":183}
+d2={"$set":{"name":"Rizwan",
+ "salary":12500}}
+res=db.Employee.update_one(d1,d2) # Emplyee is collection name
+print(res)
+print("success")
