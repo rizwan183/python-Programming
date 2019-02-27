@@ -1,0 +1,7 @@
+#  Get Data From MongoDb And Print The Data
+from pymongo import MongoClient
+mc=MongoClient()
+db=mc.Rizwan # Rizwan is database Name
+res=db.Employee.find() # Emplyee is collection name
+for x in res:
+    print(x)
