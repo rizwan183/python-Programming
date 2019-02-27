@@ -1,0 +1,6 @@
+# Delete a id from collection
+from pymongo import MongoClient
+mc=MongoClient()
+db=mc.Rizwan
+res=db.Employee.delete_one({"_id":184})
+print("success")
