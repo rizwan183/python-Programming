@@ -1,0 +1,14 @@
+import boto3
+#dynamodb=boto3.resource('dynamodb')
+#table=dynamodb.Table('CUSTOMERS')
+def lambda_handler(event, context):
+    # TODO implement
+    dynamodb=boto3.resource('dynamodb')
+    table=dynamodb.Table('CUSTOMERS')
+    with table.batch_writer() as batch:
+        batch.put_item(Item={"CUSTOMER_ID ":input("Enter Customer id"),"NAME":input("name")})
+        #batch.put_item(Item={"CUSTOMER_ID ":"131","NAME":"AAC"})
+   # table.delete_item(Key=event)
+#    response=table.get_item(Key=event)
+  #  item = response['Item']
+    return { "Msg": "Sucess" }

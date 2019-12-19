@@ -1,0 +1,15 @@
+import boto3
+def lambda_handler(event, context):
+     session = boto3.session.Session()
+     current_region = session.region_name
+     s3_client = boto3.client('s3',current_region)
+     location = {'LocationConstraint':"ap-south-1"}
+     try:
+          s3_client.create_bucket(Bucket="rizwan01234",
+          CreateBucketConfiguration=location)
+     except:
+          return {
+          "msg":"Bucket Already Exist" 
+               
+          }
+     return { "msg":"Bucket Created SuccessFully" }

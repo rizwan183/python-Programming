@@ -1,0 +1,12 @@
+from boto3.dynamodb.conditions import Key
+import boto3
+#table=dynamodb.Table('CUSTOMERS')
+def lambda_handler(event, context):
+    # TODO implement
+    dynamodb=boto3.resource('dynamodb')
+    table=dynamodb.Table('CUSTOMERS')
+    table.update_item(Key={"CUSTOMER_ID ":"127"},
+    UpdateExpression='SET Mobile_number = :val1 ',
+    ExpressionAttributeValues={':val1':7392881996}
+    )
+    return { "Msg": "Sucess" }

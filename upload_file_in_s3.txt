@@ -1,0 +1,13 @@
+import boto3
+import os
+def lambda_handler(event, context):
+     s3=boto3.resource('s3')
+     try:
+          s3.Bucket('rizwan1').upload_file('a.txt','a.txt')
+     except Exception as e:
+               return {
+                "message":e}
+          
+     return {
+          "message":"File Uploaded SuccessFully"
+         }

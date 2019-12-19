@@ -1,0 +1,11 @@
+import boto3
+dynamodb=boto3.recource('dynamodb')
+table=dynamodb.Table('Table_name")
+def lambda_handler(event,context):
+        with table.batchh_writer() as batch:
+            batch.put_item=(Item={""})
+            batch.put_item=(Item={""})
+            batch.put_item=(Item={""})
+            batch.put_item=(Item={""})
+            batch.put_item=(Item={""})
+            batch.put_item=(Item={""})

@@ -1,0 +1,10 @@
+from boto3.dynamodb.conditions import Key
+import boto3
+#table=dynamodb.Table('CUSTOMERS')
+def lambda_handler(event, context):
+    # TODO implement
+    dynamodb=boto3.resource('dynamodb')
+    table=dynamodb.Table('CUSTOMERS')
+    response=table.query(KeyConditionExpression=Key("CUSTOMER_ID ").eq("130"))
+    items = response['Items']
+    return { "Result":items ,"Msg": "Sucess" }
