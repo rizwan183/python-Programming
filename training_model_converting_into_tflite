@@ -1,0 +1,60 @@
+# Write Python3 code here
+import tensorflow as tf
+import keras
+from tensorflow import lite
+from keras.models import Model
+from keras.layers import Input,Dense
+
+mnist = tf.keras.datasets.fashion_mnist
+
+
+(training_images, training_labels), (test_images, test_labels) = mnist.load_data()
+
+
+training_images = training_images / 255.0
+test_images = test_images / 255.0
+
+
+model = tf.keras.models.Sequential([tf.keras.layers.Flatten(),
+									tf.keras.layers.Dense(
+											128, activation=tf.nn.relu),
+									tf.keras.layers.Dense(
+											10, activation=tf.nn.softmax)])
+
+
+model.compile(optimizer = 'adam',
+           loss = 'sparse_categorical_crossentropy',
+           metrics=['accuracy'])
+
+model.fit(training_images, training_labels, epochs=5)
+
+
+model.evaluate(test_images, test_labels)
+
+
+model_json = model.to_json()
+with open("model1.json", "w") as json_file:
+    json_file.write(model_json)
+# serialize weights to HDF5
+model.save_weights("model1.h5")
+print("Saved model to disk")
+
+
+json_file = open("model1.json", "r")
+loaded_model_json = json_file.read()
+json_file.close()
+loaded_model = tf.keras.models.model_from_json(loaded_model_json)
+# load weights into new model
+#model_load=keras.models.load_model(weights=r"model1.h5")
+#print("Loaded model from disk")
+#print("model",model_load)
+
+model.load_weights('model1.h5')
+
+
+converter=lite.TFLiteConverter.from_keras_model(model)
+#optmizing the model
+converter.optimizations = [tf.lite.Optimize.OPTIMIZE_FOR_SIZE]
+#converting the model into the tflite
+tflite_model=converter.convert()
+open("linear3.tflite","wb").write(tflite_model)
